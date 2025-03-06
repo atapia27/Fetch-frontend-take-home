@@ -1,5 +1,5 @@
 import ComboBox from "@/components/combobox/ComboBox";
-import { ZIP_CODE_LIST } from "../constants/zipCodes"; // ✅ Import generated ZIP codes
+import { ZIP_CODE_LIST } from "../constants/zipCodes";
 
 interface ZipCodeFilterProps {
   zipCodes: string[];
@@ -11,7 +11,7 @@ export default function ZipCodeFilter({
   setZipCodes,
 }: ZipCodeFilterProps) {
   const addZipCode = (zip: string) => {
-    if (!ZIP_CODE_LIST.includes(zip)) return; // ✅ Ensure ZIP is valid
+    if (!ZIP_CODE_LIST.includes(zip)) return;
     if (!zipCodes.includes(zip)) {
       setZipCodes([...zipCodes, zip]);
     }
@@ -25,7 +25,7 @@ export default function ZipCodeFilter({
     <div className="w-full">
       {/* ComboBox for ZIP Code Selection */}
       <ComboBox
-        options={ZIP_CODE_LIST} // ✅ Now using the generated list
+        options={ZIP_CODE_LIST}
         onSelect={addZipCode}
         placeholder="Enter or select ZIP code..."
       />

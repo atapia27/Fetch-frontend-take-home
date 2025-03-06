@@ -1,4 +1,5 @@
 // Constant list of common US ZIP codes
+// TBD if list or dynamic list will be used
 export const ZIP_CODE_LIST = [
   "10001",
   "90001",
