@@ -18,7 +18,7 @@ export default function ComboBoxInput({
       onChange={(e) => onChange(e.target.value)}
       onFocus={onFocus} 
       placeholder={placeholder}
-      className="w-full rounded-md border p-2"
+      className="w-full rounded-lg border border-gray-300 p-2 "
     />
   );
 }

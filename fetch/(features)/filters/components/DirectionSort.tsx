@@ -1,4 +1,5 @@
 import * as styles from "@/(features)/filters/styles/styles";
+import { twMerge } from "tailwind-merge";
 
 interface DirectionSortProps {
   sortOrder: "asc" | "desc";
@@ -11,7 +12,8 @@ export default function DirectionSort({
 }: DirectionSortProps) {
   return (
     <div>
-      <button onClick={onToggleSort} className={styles.inputBase}>
+      <button onClick={onToggleSort}         className={twMerge(styles.inputBase, "w-full text-left")}
+      >
         Sort: {sortOrder === "asc" ? "Ascending" : "Descending"}
       </button>
     </div>

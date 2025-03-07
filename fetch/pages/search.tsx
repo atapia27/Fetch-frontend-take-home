@@ -1,6 +1,7 @@
 import useSearchFilters from "@/(features)/search/hooks/useSearchFilters";
 import SearchLayout from "@/(features)/search/layout/SearchLayout";
 import DogCard from "@/(features)/search/components/DogCard";
+import Pagination from "@/layout/Pagination";
 
 export default function SearchPage() {
   const {
@@ -62,7 +63,11 @@ export default function SearchPage() {
       </div>
 
       {/* Pagination */}
-
+      <Pagination
+        page={page}
+        totalPages={Math.ceil(totalResults / size)}
+        onPageChange={setPage}
+      />
     </SearchLayout>
   );
 }

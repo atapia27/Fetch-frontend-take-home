@@ -1,5 +1,6 @@
 import * as styles from "@/(features)/filters/styles/styles";
 import { twMerge } from "tailwind-merge";
+
 interface CategoryFilterProps {
   sortField: string;
   setSortField: (field: string) => void;
