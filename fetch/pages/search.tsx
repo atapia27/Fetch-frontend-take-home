@@ -1,7 +1,8 @@
 import useSearchFilters from "@/(features)/search/hooks/useSearchFilters";
-import SearchLayout from "@/(features)/search/layout/SearchLayout";
+import MainPageLayout from "@/layout/MainPageLayout";
 import DogCard from "@/(features)/search/components/DogCard";
 import Pagination from "@/layout/Pagination";
+import Sonner from "@/(features)/favorites/components/Sonner";
 
 export default function SearchPage() {
   const {
@@ -28,7 +29,7 @@ export default function SearchPage() {
   } = useSearchFilters();
 
   return (
-    <SearchLayout
+    <MainPageLayout
       breeds={breeds}
       selectedBreeds={selectedBreeds}
       setSelectedBreeds={setSelectedBreeds}
@@ -45,6 +46,8 @@ export default function SearchPage() {
       size={size}
       setSize={setSize}
     >
+
+      <Sonner />
 
       {/* Loading State */}
       {loading && <p className="text-center text-gray-500">Loading dogs...</p>}
@@ -68,6 +71,6 @@ export default function SearchPage() {
         totalPages={Math.ceil(totalResults / size)}
         onPageChange={setPage}
       />
-    </SearchLayout>
+    </MainPageLayout>
   );
 }
