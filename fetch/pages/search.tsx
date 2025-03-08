@@ -50,7 +50,7 @@ export default function SearchPage() {
       <Sonner />
 
       {/* Loading State */}
-      {loading && <p className="text-center text-gray-500">Loading dogs...</p>}
+      {loading && <p className="text-center text-gray-500 h-screen">Loading dogs...</p>}
 
       {/* Dog Results */}
       {!loading && dogs.length === 0 && (
@@ -59,11 +59,22 @@ export default function SearchPage() {
         </p>
       )}
 
+      {/* Display Skeleton?
+
+      {!loading && dogs.length !== 0 && (
+        <div className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
+          {dogs.map((dog) => (
+            <DogCard key={dog.id} dog={dog} />
+          ))}
+        </div>
+      )}      
+      */}
+      
       <div className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
-        {dogs.map((dog) => (
-          <DogCard key={dog.id} dog={dog} />
-        ))}
-      </div>
+      {dogs.map((dog) => (
+        <DogCard key={dog.id} dog={dog} />
+      ))}
+    </div>
 
       {/* Pagination */}
       <Pagination

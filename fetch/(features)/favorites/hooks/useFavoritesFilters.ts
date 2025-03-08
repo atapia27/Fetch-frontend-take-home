@@ -1,36 +1,72 @@
 import { useFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
-import { useEffect, useState } from "react";
-import  Dog  from "@/utils/types";
+import { useEffect, useState, useMemo } from "react";
 import { useDogFilters } from "@/hooks/useDogFilters";
-
+import Dog from "@/utils/types";
 
 export function useFavoritesFilters() {
   const { favorites, refreshFavorites } = useFavoritesStore();
+  const [filteredDogs, setFilteredDogs] = useState<Dog[]>([]); // ✅ Store paginated results
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  // Refresh favorites when component mounts
   useEffect(() => {
     refreshFavorites();
   }, [refreshFavorites]);
 
-  // Extract unique breeds from favorite dogs
-  const breeds = [...new Set(favorites.map((dog) => dog.breed))];
+  const breeds = useMemo(() => [...new Set(favorites.map((dog) => dog.breed))], [favorites]);
 
   // Use shared filtering logic
-  const filters = useDogFilters(favorites);
+  const filters = useDogFilters();
 
-  // Track filtered totalResults separately
+  // Apply filtering, sorting, and pagination
   useEffect(() => {
     setLoading(true);
-    setTotalResults(filters.dogs.length);
+
+    let filteredList = favorites.filter((dog) =>
+      (!filters.selectedBreeds.length || filters.selectedBreeds.includes(dog.breed)) &&
+      (!filters.zipCodes.length || filters.zipCodes.includes(dog.zip_code)) &&
+      dog.age >= filters.ageMin &&
+      dog.age <= filters.ageMax
+    );
+
+    // Sorting
+    filteredList = filteredList.sort((a, b) => {
+      const fieldA = a[filters.sortField as keyof Dog];
+      const fieldB = b[filters.sortField as keyof Dog];
+
+      if (fieldA < fieldB) return filters.sortOrder === "asc" ? -1 : 1;
+      if (fieldA > fieldB) return filters.sortOrder === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    // ✅ Store the total filtered results before pagination
+    setTotalResults(filteredList.length);
+
+    // Pagination
+    const paginatedList = filteredList.slice((filters.page - 1) * filters.size, filters.page * filters.size);
+    
+    // ✅ Update state with paginated results
+    setFilteredDogs(paginatedList);
+    
     setLoading(false);
-  }, [filters.dogs]);
+  }, [
+    favorites,
+    filters.selectedBreeds,
+    filters.zipCodes,
+    filters.ageMin,
+    filters.ageMax,
+    filters.sortField,
+    filters.sortOrder,
+    filters.page,
+    filters.size,
+  ]);
 
   return {
-    breeds, // Unique breeds from favorites only
+    favorites, //  Keep this to access full list if needed
+    dogs: filteredDogs, // Correct paginated results to display
+    breeds,
     totalResults,
     loading,
-    ...filters, // Spread reusable filter logic
+    ...filters,
   };
 }

@@ -6,18 +6,16 @@ import { useDogFilters } from "@/hooks/useDogFilters";
 
 export default function useSearchFilters() {
   const { breeds, fetchBreeds } = useDogStore();
-  const [dogs, setDogs] = useState<Dog[]>([]);
+  const [filteredDogs, setFilteredDogs] = useState<Dog[]>([]);
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const filters = useDogFilters(dogs); // Use shared filter logic
+  const filters = useDogFilters();
 
-  // Fetch breeds if not already loaded
   useEffect(() => {
     if (breeds.length === 0) fetchBreeds();
   }, [breeds, fetchBreeds]);
 
-  // Load dogs function
   const loadDogs = useCallback(async () => {
     setLoading(true);
     try {
@@ -31,7 +29,8 @@ export default function useSearchFilters() {
         filters.page,
         filters.size
       );
-      setDogs(data.dogs);
+
+      setFilteredDogs(data.dogs);
       setTotalResults(data.totalResults);
     } catch (error) {
       console.error("Error loading dogs:", error);
@@ -49,15 +48,15 @@ export default function useSearchFilters() {
     filters.size,
   ]);
 
-  // Fetch dogs when any filter changes
   useEffect(() => {
     loadDogs();
   }, [loadDogs]);
 
   return {
+    dogs: filteredDogs,
     breeds,
     totalResults,
     loading,
-    ...filters, // Spread reusable filter logic
+    ...filters,
   };
 }
