@@ -47,12 +47,12 @@ export const fetchDogs = async (
 
     console.log("API Response (IDs):", response.data);
 
-    const dogIDs = response.data.resultIds || []; // ✅ Store the dog IDs
+    const dogIDs = response.data.resultIds || []; //  Store the dog IDs
     const totalResults = response.data.total || 0;
 
     const dogs = await fetchDogDetails(dogIDs);
 
-    return { dogIDs, dogs, totalResults }; // ✅ Return dogIDs too
+    return { dogIDs, dogs, totalResults }; //  Return dogIDs too
   } catch (error) {
     console.error("Failed to fetch dogs:", error);
     return { dogIDs: [], dogs: [], totalResults: 0 };
@@ -62,20 +62,19 @@ export const fetchDogs = async (
 
 export const fetchMatch = async () => {
   try {
-    const { favorites } = useFavoritesStore.getState();
-    const ids = favorites.map((dog) => dog.id) 
+    const { favoriteDogIDs } = useFavoritesStore.getState();
 
-    if (ids.length === 0) {
+    if (favoriteDogIDs.length === 0) {
       console.error("No favorite dogs selected for matching.");
       return null;
     }
 
-    console.log("Sending favorites to /dogs/match:", ids);
+    console.log("Sending favorites to /dogs/match:", favoriteDogIDs);
 
     // Step 1: Send favorite dog IDs to /dogs/match
     const matchResponse = await axios.post(
       `${API_BASE_URL}/dogs/match`,
-      ids, 
+      favoriteDogIDs, 
       { withCredentials: true },
     );
 
