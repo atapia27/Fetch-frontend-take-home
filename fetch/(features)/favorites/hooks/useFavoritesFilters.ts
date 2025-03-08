@@ -4,14 +4,10 @@ import { useDogFilters } from "@/hooks/useDogFilters";
 import Dog from "@/utils/types";
 
 export function useFavoritesFilters() {
-  const { favorites, refreshFavorites } = useFavoritesStore();
-  const [filteredDogs, setFilteredDogs] = useState<Dog[]>([]); // ✅ Store paginated results
+  const { favorites } = useFavoritesStore();
+  const [filteredDogs, setFilteredDogs] = useState<Dog[]>([]); // MainPage Store paginated results
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    refreshFavorites();
-  }, [refreshFavorites]);
 
   const breeds = useMemo(() => [...new Set(favorites.map((dog) => dog.breed))], [favorites]);
 
@@ -39,13 +35,13 @@ export function useFavoritesFilters() {
       return 0;
     });
 
-    // ✅ Store the total filtered results before pagination
+    // MainPage Store the total filtered results before pagination
     setTotalResults(filteredList.length);
 
     // Pagination
     const paginatedList = filteredList.slice((filters.page - 1) * filters.size, filters.page * filters.size);
     
-    // ✅ Update state with paginated results
+    // MainPage Update state with paginated results
     setFilteredDogs(paginatedList);
     
     setLoading(false);

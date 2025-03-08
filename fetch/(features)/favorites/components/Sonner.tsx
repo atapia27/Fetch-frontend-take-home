@@ -5,9 +5,14 @@ export default function Sonner() {
   const { notifications, clearNotification } = useFavoritesStore();
 
   useEffect(() => {
-    notifications.forEach((notif) => {
-      setTimeout(() => clearNotification(notif.id), 3000); // Auto-dismiss after 3s
-    });
+    const timeouts = notifications.map((notif) =>
+      setTimeout(() => clearNotification(notif.id), 1500) // Auto-dismiss after 3s
+    );
+
+    return () => {
+      // Cleanup timeouts if notifications change before timeout triggers
+      timeouts.forEach(clearTimeout);
+    };
   }, [notifications, clearNotification]);
 
   return (
