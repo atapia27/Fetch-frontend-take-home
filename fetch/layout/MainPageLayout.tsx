@@ -2,7 +2,7 @@ import Navbar from "@/layout/Navbar";
 import Header from "@/layout/Header";
 import Sidebar from "@/layout/Sidebar";
 
-interface SearchLayoutProps {
+interface MainPageLayoutProps {
   children: React.ReactNode;
   breeds: string[];
   selectedBreeds: string[];
@@ -21,16 +21,16 @@ interface SearchLayoutProps {
   setSize: (size: number) => void;
 }
 
-export default function SearchLayout(props: SearchLayoutProps) {
+export default function MainPageLayout(props: MainPageLayoutProps) {
   return (
     <div className="mx-auto flex flex-col p-6 pt-16">
       {/* Navbar */}
       <Navbar />
 
-      {/* Sidebar (Moved to layout) */}
+      {/* Sidebar now uses breeds from favorited dogs */}
       <Sidebar {...props} />
 
-      {/* Header (Pagination Filter) */}
+      {/* Header for Sorting/Pagination */}
       <Header size={props.size} setSize={props.setSize} />
 
       {/* Main Content */}

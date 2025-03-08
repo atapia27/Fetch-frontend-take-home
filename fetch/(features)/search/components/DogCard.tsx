@@ -1,6 +1,6 @@
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Image from "next/image";
-import { useState } from "react";
+import { useFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
 import Dog from "@/utils/types";
 
 interface DogCardProps {
@@ -8,11 +8,8 @@ interface DogCardProps {
 }
 
 export default function DogCard({ dog }: DogCardProps) {
-  const [favorite, setFavorite] = useState(false);
-
-  function toggleFavorite() {
-    setFavorite(!favorite);
-  }
+  const { toggleFavorite, isFavorite } = useFavoritesStore();
+  const favorited = isFavorite(dog.id);
 
   /** --- Full Reused Styles --- **/
   const infoLabelText = "text-sm font-semibold text-gray-600";
@@ -33,11 +30,11 @@ export default function DogCard({ dog }: DogCardProps) {
 
         {/* Heart Button */}
         <button
-          onClick={toggleFavorite}
-          className="absolute top-0 right-0 text-red-500 hover:text-red-700 focus:outline-none"
+          onClick={() => toggleFavorite(dog)}
+          className="absolute top-0 right-0 text-red-500 hover:text-red-700 focus:outline-none cursor-pointer"
         >
-          {favorite ? <FaHeart size={24} /> : <FaRegHeart size={24} />}
-        </button>
+          {favorited ? <FaHeart size={24} /> : <FaRegHeart size={24} />}
+          </button>
       </div>
 
       {/* Dog Name */}

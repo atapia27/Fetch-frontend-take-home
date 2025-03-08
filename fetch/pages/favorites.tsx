@@ -1,10 +1,11 @@
-import useSearchFilters from "@/(features)/search/hooks/useSearchFilters";
 import MainPageLayout from "@/layout/MainPageLayout";
+
 import DogCard from "@/(features)/search/components/DogCard";
 import Pagination from "@/layout/Pagination";
+import { useFavoritesFilters } from "@/(features)/favorites/hooks/useFavoritesFilters";
 import Sonner from "@/(features)/favorites/components/Sonner";
 
-export default function SearchPage() {
+export default function FavoritesPage() {
   const {
     breeds,
     selectedBreeds,
@@ -26,7 +27,7 @@ export default function SearchPage() {
     dogs,
     totalResults,
     loading,
-  } = useSearchFilters();
+  } = useFavoritesFilters(); // Using favorites-specific filter logic
 
   return (
     <MainPageLayout
@@ -50,15 +51,14 @@ export default function SearchPage() {
       <Sonner />
 
       {/* Loading State */}
-      {loading && <p className="text-center text-gray-500">Loading dogs...</p>}
+      {loading && <p className="text-center text-gray-500">Loading favorites...</p>}
 
-      {/* Dog Results */}
+      {/* No Favorites */}
       {!loading && dogs.length === 0 && (
-        <p className="text-center text-gray-500">
-          No dogs found. Try different filters.
-        </p>
+        <p className="text-center text-gray-500">No favorite dogs match the filters.</p>
       )}
 
+      {/* Favorite Dogs Grid */}
       <div className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
         {dogs.map((dog) => (
           <DogCard key={dog.id} dog={dog} />
