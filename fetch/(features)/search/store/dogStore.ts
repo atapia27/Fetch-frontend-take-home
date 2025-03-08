@@ -2,10 +2,12 @@ import { create } from "zustand";
 import axios from "axios";
 import { fetchDogs } from "@/utils/api";
 import Dog from "@/utils/types";
+
 const API_BASE_URL = "https://frontend-take-home-service.fetch.com";
 
 interface DogState {
   breeds: string[];
+  dogIDs: string[]; //  Store dog IDs separately
   dogs: Dog[]; // Ensure `dogs` is always an array
   totalResults: number;
   loading: boolean;
@@ -24,7 +26,8 @@ interface DogState {
 
 export const useDogStore = create<DogState>((set) => ({
   breeds: [],
-  dogs: [], //Initialize as an empty array to prevent `undefined`
+  dogIDs: [], //  Initialize dog IDs
+  dogs: [], // Initialize as an empty array to prevent `undefined`
   totalResults: 0,
   loading: false,
 
@@ -46,10 +49,14 @@ export const useDogStore = create<DogState>((set) => ({
 
     try {
       const data = await fetchDogs(selectedBreeds, zipCodes, ageMin, ageMax, sortField, sortOrder, page, size);
-      set({ dogs: Array.isArray(data.dogs) ? data.dogs : [], totalResults: data.totalResults }); // Ensure `dogs` is always an array
+      set({
+        dogIDs: data.dogIDs, //  Store the dog IDs
+        dogs: Array.isArray(data.dogs) ? data.dogs : [],
+        totalResults: data.totalResults
+      });
     } catch (error) {
       console.error("Failed to fetch dogs:", error);
-      set({ dogs: [] }); // Fallback to empty array on failure
+      set({ dogIDs: [], dogs: [] }); // Fallback to empty array on failure
     } finally {
       set({ loading: false });
     }
