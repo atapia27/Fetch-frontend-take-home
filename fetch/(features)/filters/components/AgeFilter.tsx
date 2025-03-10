@@ -25,7 +25,7 @@ export default function AgeFilter({
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <div className="flex w-full flex-col items-center">
         <Slider
           range
@@ -53,7 +53,7 @@ export default function AgeFilter({
       </div>
 
       {/* Display Selected Values */}
-      <div className="pt-1 flex justify-between text-sm">
+      <div className="flex justify-between pt-1 text-sm">
         <span>Min: {ageMin}</span>
         <span>Max: {ageMax}</span>
       </div>

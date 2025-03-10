@@ -78,7 +78,7 @@ export default function MatchModal({ onClose }: MatchModalProps) {
 
             <button
               onClick={handleClose}
-              className="cursor-pointer font-bold mt-4 w-full rounded-lg bg-red-500 py-2 text-white shadow-md hover:bg-red-600"
+              className="mt-4 w-full cursor-pointer rounded-lg bg-red-500 py-2 font-bold text-white shadow-md hover:bg-red-600"
             >
               Close
             </button>

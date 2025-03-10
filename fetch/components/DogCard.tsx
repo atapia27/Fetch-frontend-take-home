@@ -16,9 +16,8 @@ export default function DogCard({ dog }: DogCardProps) {
 
   return (
     <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white px-2 py-6 shadow-md">
-      
       {/* Circular Profile Picture */}
-      <div className="relative ">
+      <div className="relative">
         <div className="relative h-[10vw] w-[10vw] overflow-hidden rounded-full border-0">
           <Image
             src={dog.img ?? "/placeholder.png"}
@@ -32,10 +31,10 @@ export default function DogCard({ dog }: DogCardProps) {
         {/* Heart Button */}
         <button
           onClick={() => toggleFavorite(dog)}
-          className="absolute top-0 right-0 text-red-500 hover:text-red-700 focus:outline-none cursor-pointer"
+          className="absolute top-0 right-0 cursor-pointer text-red-500 hover:text-red-700 focus:outline-none"
         >
           {favorited ? <FaHeart size={24} /> : <FaRegHeart size={24} />}
-          </button>
+        </button>
       </div>
 
       {/* Dog Name */}

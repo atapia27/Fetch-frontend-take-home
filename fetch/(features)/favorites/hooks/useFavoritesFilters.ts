@@ -9,7 +9,10 @@ export function useFavoritesFilters() {
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const breeds = useMemo(() => [...new Set(favorites.map((dog) => dog.breed))], [favorites]);
+  const breeds = useMemo(
+    () => [...new Set(favorites.map((dog) => dog.breed))],
+    [favorites],
+  );
 
   // Use shared filtering logic
   const filters = useDogFilters();
@@ -18,11 +21,13 @@ export function useFavoritesFilters() {
   useEffect(() => {
     setLoading(true);
 
-    let filteredList = favorites.filter((dog) =>
-      (!filters.selectedBreeds.length || filters.selectedBreeds.includes(dog.breed)) &&
-      (!filters.zipCodes.length || filters.zipCodes.includes(dog.zip_code)) &&
-      dog.age >= filters.ageMin &&
-      dog.age <= filters.ageMax
+    let filteredList = favorites.filter(
+      (dog) =>
+        (!filters.selectedBreeds.length ||
+          filters.selectedBreeds.includes(dog.breed)) &&
+        (!filters.zipCodes.length || filters.zipCodes.includes(dog.zip_code)) &&
+        dog.age >= filters.ageMin &&
+        dog.age <= filters.ageMax,
     );
 
     // Sorting
@@ -39,11 +44,14 @@ export function useFavoritesFilters() {
     setTotalResults(filteredList.length);
 
     // Pagination
-    const paginatedList = filteredList.slice((filters.page - 1) * filters.size, filters.page * filters.size);
-    
+    const paginatedList = filteredList.slice(
+      (filters.page - 1) * filters.size,
+      filters.page * filters.size,
+    );
+
     // MainPage Update state with paginated results
     setFilteredDogs(paginatedList);
-    
+
     setLoading(false);
   }, [
     favorites,

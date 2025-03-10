@@ -35,7 +35,9 @@ export const useFavoritesStore = create<FavoritesState>()(
 
       removeFavorite: (dog: Dog) => {
         set((state) => {
-          const updatedFavorites = state.favorites.filter((fav) => fav.id !== dog.id);
+          const updatedFavorites = state.favorites.filter(
+            (fav) => fav.id !== dog.id,
+          );
           return {
             favorites: updatedFavorites,
             favoriteDogIDs: updatedFavorites.map((fav) => fav.id), // Update IDs
@@ -53,7 +55,10 @@ export const useFavoritesStore = create<FavoritesState>()(
 
       addNotification: (message: string) => {
         set((state) => ({
-          notifications: [...state.notifications, { id: Date.now().toString(), message }],
+          notifications: [
+            ...state.notifications,
+            { id: Date.now().toString(), message },
+          ],
         }));
       },
 
@@ -63,6 +68,6 @@ export const useFavoritesStore = create<FavoritesState>()(
         }));
       },
     }),
-    { name: "favorites-storage" }
-  )
+    { name: "favorites-storage" },
+  ),
 );

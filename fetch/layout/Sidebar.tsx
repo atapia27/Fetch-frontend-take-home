@@ -53,24 +53,24 @@ export default function Sidebar({
     <>
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 pb-16 z-60 h-screen w-64 overflow-y-auto border-r border-slate-200 bg-white shadow-md transition-transform duration-300 ${
+        className={`fixed top-0 left-0 z-60 h-screen w-64 overflow-y-auto border-r border-slate-200 bg-white pb-16 shadow-md transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="py-6 px-6">
+        <div className="px-6 py-6">
           {/* Close Button */}
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold">Filters</h2>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-gray-500 hover:text-gray-700 cursor-pointer"
+              className="cursor-pointer text-gray-500 hover:text-gray-700"
             >
               <FiX size={24} />
             </button>
           </div>
 
           {/* Filter Sections */}
-          <div className="space-y-6 mt-4">
+          <div className="mt-4 space-y-6">
             <div className={FILTER_WRAPPER_STYLE}>
               <p className={FILTER_LABEL_STYLE}>Breed</p>
               <BreedFilter
@@ -97,14 +97,19 @@ export default function Sidebar({
 
             <div className={FILTER_WRAPPER_STYLE}>
               <p className={FILTER_LABEL_STYLE}>Sort By</p>
-              <CategoryFilter sortField={sortField} setSortField={setSortField} />
+              <CategoryFilter
+                sortField={sortField}
+                setSortField={setSortField}
+              />
             </div>
 
             <div className={FILTER_WRAPPER_STYLE}>
               <p className={FILTER_LABEL_STYLE}>Sort Direction</p>
               <DirectionSort
                 sortOrder={sortOrder}
-                onToggleSort={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+                onToggleSort={() =>
+                  setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                }
               />
             </div>
           </div>
@@ -113,5 +118,3 @@ export default function Sidebar({
     </>
   );
 }
-
-

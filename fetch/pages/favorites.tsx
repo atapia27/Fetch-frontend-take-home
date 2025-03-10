@@ -58,7 +58,7 @@ export default function FavoritesPage() {
         <div className="flex justify-center pb-4">
           <button
             onClick={() => setMatchModalOpen(true)}
-            className="gap-2 flex items-center rounded-lg bg-red-600 px-6 py-3 text-white font-bold shadow-md hover:bg-red-800 cursor-pointer"
+            className="flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-6 py-3 font-bold text-white shadow-md hover:bg-red-800"
           >
             Find My Match!
             <FaHeart />
@@ -66,14 +66,16 @@ export default function FavoritesPage() {
         </div>
       )}
       {/* Loading State */}
-      {loading && <p className="text-center text-gray-500">Loading favorites...</p>}
+      {loading && (
+        <p className="text-center text-gray-500">Loading favorites...</p>
+      )}
 
       {/* No Favorites */}
       {!loading && dogs.length === 0 && (
-        <p className="text-center text-gray-500">No favorite dogs match the filters.</p>
+        <p className="text-center text-gray-500">
+          No favorite dogs match the filters.
+        </p>
       )}
-
-
 
       {/* Favorite Dogs Grid */}
       <div className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
@@ -83,7 +85,9 @@ export default function FavoritesPage() {
       </div>
 
       {/* Match Modal */}
-      {isMatchModalOpen && <MatchModal onClose={() => setMatchModalOpen(false)} />}
+      {isMatchModalOpen && (
+        <MatchModal onClose={() => setMatchModalOpen(false)} />
+      )}
 
       {/* Pagination */}
       <Pagination

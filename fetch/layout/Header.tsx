@@ -8,15 +8,20 @@ interface HeaderProps {
   setIsOpen: (isOpen: boolean) => void;
 }
 
-export default function Header({ size, setSize, isOpen, setIsOpen }: HeaderProps) {
+export default function Header({
+  size,
+  setSize,
+  isOpen,
+  setIsOpen,
+}: HeaderProps) {
   return (
-    <div className="pt-4 mb-4 pb-2 border-b border-gray-300 mx-64 ">
-      <div className="grid grid-cols-3  items-center gap-12 mx-12 ">
+    <div className="mx-64 mb-4 border-b border-gray-300 pt-4 pb-2">
+      <div className="mx-12 grid grid-cols-3 items-center gap-12">
         {/* Sidebar Toggle */}
-          <SidebarToggle isOpen={isOpen} setIsOpen={setIsOpen} />
-          <div></div>
+        <SidebarToggle isOpen={isOpen} setIsOpen={setIsOpen} />
+        <div></div>
         {/* Pagination Size Filter */}
-          <PaginationSizeFilter size={size} onSizeChange={setSize} />
+        <PaginationSizeFilter size={size} onSizeChange={setSize} />
       </div>
     </div>
   );

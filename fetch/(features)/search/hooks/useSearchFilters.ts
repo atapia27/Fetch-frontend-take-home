@@ -27,7 +27,7 @@ export default function useSearchFilters() {
         filters.sortField,
         filters.sortOrder,
         filters.page,
-        filters.size
+        filters.size,
       );
 
       setFilteredDogs(data.dogs);

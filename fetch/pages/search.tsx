@@ -49,11 +49,15 @@ export default function SearchPage() {
       <Sonner />
 
       {/* Loading State */}
-      {loading && <p className="text-center text-gray-500 h-screen">Loading dogs...</p>}
+      {loading && (
+        <p className="h-screen text-center text-gray-500">Loading dogs...</p>
+      )}
 
       {/* No Dogs Found */}
       {!loading && dogs.length === 0 && (
-        <p className="text-center text-gray-500">No dogs found. Try different filters.</p>
+        <p className="text-center text-gray-500">
+          No dogs found. Try different filters.
+        </p>
       )}
 
       {/* Dog Results */}

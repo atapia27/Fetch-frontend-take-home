@@ -29,7 +29,7 @@ export const fetchDogs = async (
   sortField: string,
   sortOrder: "asc" | "desc",
   page: number,
-  size: number
+  size: number,
 ) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/dogs/search`, {
@@ -59,7 +59,6 @@ export const fetchDogs = async (
   }
 };
 
-
 export const fetchMatch = async () => {
   try {
     const { favoriteDogIDs } = useFavoritesStore.getState();
@@ -74,7 +73,7 @@ export const fetchMatch = async () => {
     // Step 1: Send favorite dog IDs to /dogs/match
     const matchResponse = await axios.post(
       `${API_BASE_URL}/dogs/match`,
-      favoriteDogIDs, 
+      favoriteDogIDs,
       { withCredentials: true },
     );
 
@@ -89,7 +88,7 @@ export const fetchMatch = async () => {
     // Step 2: Fetch full details of matched dog
     const detailsResponse = await axios.post(
       `${API_BASE_URL}/dogs`,
-      [matchedDogId], 
+      [matchedDogId],
       { withCredentials: true },
     );
 

@@ -38,14 +38,16 @@ export default function MainPageLayout(props: MainPageLayoutProps) {
 
       {/* Banner Background */}
       <div className={props.bannerClassName}>
-        <div className="grid grid-cols-2 h-full w-full px-64">
+        <div className="grid h-full w-full grid-cols-2 px-64">
           {props.bannerTextPosition === "left" ? (
             <>
               <div className={props.bannerContentClassName}>
-                <h1 className="text-5xl font-bold drop-shadow-md capitalize">
+                <h1 className="text-5xl font-bold capitalize drop-shadow-md">
                   {props.bannerTitle}
                 </h1>
-                <p className="text-lg font-semibold">{props.bannerDescription}</p>
+                <p className="text-lg font-semibold">
+                  {props.bannerDescription}
+                </p>
               </div>
               <div /> {/* Empty div to maintain grid structure */}
             </>
@@ -53,10 +55,12 @@ export default function MainPageLayout(props: MainPageLayoutProps) {
             <>
               <div /> {/* Empty div to maintain grid structure */}
               <div className={props.bannerContentClassName}>
-                <h1 className="text-5xl font-bold drop-shadow-md capitalize">
+                <h1 className="text-5xl font-bold capitalize drop-shadow-md">
                   {props.bannerTitle}
                 </h1>
-                <p className="text-lg font-semibold">{props.bannerDescription}</p>
+                <p className="text-lg font-semibold">
+                  {props.bannerDescription}
+                </p>
               </div>
             </>
           )}
@@ -64,10 +68,15 @@ export default function MainPageLayout(props: MainPageLayoutProps) {
       </div>
 
       {/* Header for Sorting/Pagination */}
-      <Header size={props.size} setSize={props.setSize} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Header
+        size={props.size}
+        setSize={props.setSize}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
 
       {/* Main Content */}
-      <div className="flex flex-col px-72 w-full pb-4 bg-[url('/dogPattern.png')] bg-contain bg-repeat-y">
+      <div className="flex w-full flex-col bg-[url('/dogPattern.png')] bg-contain bg-repeat-y px-72 pb-4">
         <div>{props.children}</div>
       </div>
     </div>

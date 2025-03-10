@@ -30,7 +30,7 @@ export default function FavoritesLayout(props: FavoritesLayoutProps) {
       bannerDescription="Easily browse and manage your saved favorites."
       bannerClassName={twMerge(
         "relative w-full h-[5vh] bg-cover bg-no-repeat md:h-[35vh] pt-18",
-        "bg-[url('/favoritesBanner.jpeg')] bg-[center-left_-3vh]"
+        "bg-[url('/favoritesBanner.jpeg')] bg-[center-left_-3vh]",
       )}
       bannerContentClassName="flex items-end flex-col justify-center gap-8 text-right"
       bannerTextPosition="right" // Text in the second grid column

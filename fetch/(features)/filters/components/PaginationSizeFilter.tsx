@@ -14,12 +14,12 @@ export default function PaginationSizeFilter({
   const FILTER_LABEL_STYLE = "text-xs font-bold text-gray-500 uppercase mb-1 ";
 
   return (
-    <div className="flex flex-col items-center gap-2 ">
+    <div className="flex flex-col items-center gap-2">
       <label className={FILTER_LABEL_STYLE}>Results per page</label>
       <select
         value={size}
         onChange={(e) => onSizeChange(Number(e.target.value))}
-        className={twMerge(styles.inputBase, "text-center ")}
+        className={twMerge(styles.inputBase, "text-center")}
       >
         {PAGE_SIZE_OPTIONS.map((option) => (
           <option key={option} value={option}>
