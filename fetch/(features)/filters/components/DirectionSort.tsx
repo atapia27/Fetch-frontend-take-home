@@ -12,7 +12,9 @@ export default function DirectionSort({
 }: DirectionSortProps) {
   return (
     <div>
-      <button onClick={onToggleSort}         className={twMerge(styles.inputBase, "w-full text-left")}
+      <button
+        onClick={onToggleSort}
+        className={twMerge(styles.inputBase, "w-full text-left")}
       >
         Sort: {sortOrder === "asc" ? "Ascending" : "Descending"}
       </button>

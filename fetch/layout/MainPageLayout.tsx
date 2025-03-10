@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "@/layout/Navbar";
 import Header from "@/layout/Header";
 import Sidebar from "@/layout/Sidebar";
@@ -19,22 +20,65 @@ interface MainPageLayoutProps {
   setSortOrder: (order: "asc" | "desc") => void;
   size: number;
   setSize: (size: number) => void;
+  bannerImage: string;
+  bannerTitle: string;
+  bannerDescription: string;
+  bannerClassName?: string;
+  bannerContentClassName?: string;
+  bannerTextPosition: "left" | "right"; // Determines which grid column the banner text should be in
 }
 
 export default function MainPageLayout(props: MainPageLayoutProps) {
-  return (
-    <div className="mx-auto flex flex-col p-6 pt-16">
-      {/* Navbar */}
-      <Navbar />
+  const [isOpen, setIsOpen] = useState(false);
 
-      {/* Sidebar now uses breeds from favorited dogs */}
-      <Sidebar {...props} />
+  return (
+    <div className="flex flex-col bg-[#F9F7F1]">
+      <Navbar />
+      <Sidebar {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
+
+      {/* Banner Background */}
+      <div className={props.bannerClassName}>
+        <div className="grid h-full w-full grid-cols-2 px-64">
+          {props.bannerTextPosition === "left" ? (
+            <>
+              <div className={props.bannerContentClassName}>
+                <h1 className="text-5xl font-bold capitalize drop-shadow-md">
+                  {props.bannerTitle}
+                </h1>
+                <p className="text-lg font-semibold">
+                  {props.bannerDescription}
+                </p>
+              </div>
+              <div /> {/* Empty div to maintain grid structure */}
+            </>
+          ) : (
+            <>
+              <div /> {/* Empty div to maintain grid structure */}
+              <div className={props.bannerContentClassName}>
+                <h1 className="text-5xl font-bold capitalize drop-shadow-md">
+                  {props.bannerTitle}
+                </h1>
+                <p className="text-lg font-semibold">
+                  {props.bannerDescription}
+                </p>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
 
       {/* Header for Sorting/Pagination */}
-      <Header size={props.size} setSize={props.setSize} />
+      <Header
+        size={props.size}
+        setSize={props.setSize}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
 
       {/* Main Content */}
-      <div className="px-64 transition-all duration-300">{props.children}</div>
+      <div className="flex w-full flex-col bg-[url('/dogPattern.png')] bg-contain bg-repeat-y px-72 pb-4">
+        <div>{props.children}</div>
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function ComboBoxList({
   useEffect(() => {
     if (highlightedIndex >= 0 && itemRefs.current[highlightedIndex]) {
       itemRefs.current[highlightedIndex]?.scrollIntoView({
-        block: "nearest", 
+        block: "nearest",
         behavior: "smooth",
       });
     }

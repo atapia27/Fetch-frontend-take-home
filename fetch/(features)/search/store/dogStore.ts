@@ -20,7 +20,7 @@ interface DogState {
     sortField: string,
     sortOrder: "asc" | "desc",
     page: number,
-    size: number
+    size: number,
   ) => Promise<void>;
 }
 
@@ -44,15 +44,33 @@ export const useDogStore = create<DogState>((set) => ({
   },
 
   // Fetch dogs based on filters
-  loadDogs: async (selectedBreeds, zipCodes, ageMin, ageMax, sortField, sortOrder, page, size) => {
+  loadDogs: async (
+    selectedBreeds,
+    zipCodes,
+    ageMin,
+    ageMax,
+    sortField,
+    sortOrder,
+    page,
+    size,
+  ) => {
     set({ loading: true });
 
     try {
-      const data = await fetchDogs(selectedBreeds, zipCodes, ageMin, ageMax, sortField, sortOrder, page, size);
+      const data = await fetchDogs(
+        selectedBreeds,
+        zipCodes,
+        ageMin,
+        ageMax,
+        sortField,
+        sortOrder,
+        page,
+        size,
+      );
       set({
         dogIDs: data.dogIDs, //  Store the dog IDs
         dogs: Array.isArray(data.dogs) ? data.dogs : [],
-        totalResults: data.totalResults
+        totalResults: data.totalResults,
       });
     } catch (error) {
       console.error("Failed to fetch dogs:", error);

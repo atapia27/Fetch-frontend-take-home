@@ -16,7 +16,6 @@ export default function InputField({
   value,
   onChange,
 }: InputFieldProps) {
-
   // Styling
   const focusStyle = "focus:ring-blue-500";
   const inputStyle = twMerge(inputBase, focusStyle);

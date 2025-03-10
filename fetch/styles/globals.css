@@ -1,40 +1,38 @@
 @import "tailwindcss";
 
-@theme{
-    --color-fetch-purple: #300c39;
-    }
+@theme {
+  --color-fetch-purple: #300c39;
+}
 
 /* Use Lexend as a close stand-in for "Fetch-Sans". */
 @font-face {
-    font-family: "Fetch-Sans";
-    font-style: normal;
-    font-weight: 400;
-    src: url("https://fonts.gstatic.com/s/lexend/v17/wlpwgwvFAVdoq2_v-6QU82RHaA.woff2")
-      format("woff2");
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: "Fetch-Sans";
-    font-style: normal;
-    font-weight: 600;
-    src: url("https://fonts.gstatic.com/s/lexend/v17/wlpwgwvFAVdoq2_v-6QU82RHaA.woff2")
-      format("woff2");
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: "Fetch-Sans";
-    font-style: normal;
-    font-weight: 700;
-    src: url("https://fonts.gstatic.com/s/lexend/v17/wlpwgwvFAVdoq2_v-6QU82RHaA.woff2")
-      format("woff2");
-    font-display: swap;
-  }
-  
-  /* Now apply it globally or wherever needed */
-  html {
-    font-family: "Fetch-Sans", sans-serif;
-  }
-  
-  
+  font-family: "Fetch-Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/lexend/v17/wlpwgwvFAVdoq2_v-6QU82RHaA.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fetch-Sans";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://fonts.gstatic.com/s/lexend/v17/wlpwgwvFAVdoq2_v-6QU82RHaA.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fetch-Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.gstatic.com/s/lexend/v17/wlpwgwvFAVdoq2_v-6QU82RHaA.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+/* Now apply it globally or wherever needed */
+html {
+  font-family: "Fetch-Sans", sans-serif;
+}

@@ -11,10 +11,9 @@ export default function SocialLoginButton({
   icon,
   label,
 }: SocialLoginButtonProps) {
-
-    /** --- Styling --- **/
+  /** --- Styling --- **/
   const buttonVariant =
-    "flex w-full items-center justify-center hover:bg-gray-100 ";
+    "flex w-full items-center justify-center hover:bg-gray-100 border ";
   const buttonStyle = twMerge(buttonBase, buttonVariant);
 
   return (

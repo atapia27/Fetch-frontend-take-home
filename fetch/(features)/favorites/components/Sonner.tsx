@@ -5,8 +5,8 @@ export default function Sonner() {
   const { notifications, clearNotification } = useFavoritesStore();
 
   useEffect(() => {
-    const timeouts = notifications.map((notif) =>
-      setTimeout(() => clearNotification(notif.id), 1500) // Auto-dismiss after 3s
+    const timeouts = notifications.map(
+      (notif) => setTimeout(() => clearNotification(notif.id), 1500), // Auto-dismiss after 3s
     );
 
     return () => {
@@ -16,7 +16,7 @@ export default function Sonner() {
   }, [notifications, clearNotification]);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col space-y-2">
+    <div className="fixed right-4 bottom-4 z-50 flex flex-col space-y-2">
       {notifications.map((notification) => (
         <div
           key={notification.id}
