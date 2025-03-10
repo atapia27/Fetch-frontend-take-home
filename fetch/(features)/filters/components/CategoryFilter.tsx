@@ -15,7 +15,7 @@ export default function CategoryFilter({
       <select
         value={sortField}
         onChange={(e) => setSortField(e.target.value)}
-        className= {twMerge(styles.inputBase, "w-full")}
+        className={twMerge(styles.inputBase, "w-full")}
       >
         <option value="breed">Breed</option>
         <option value="name">Name</option>
