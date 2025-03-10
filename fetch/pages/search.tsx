@@ -1,6 +1,6 @@
 import useSearchFilters from "@/(features)/search/hooks/useSearchFilters";
-import MainPageLayout from "@/layout/MainPageLayout";
-import DogCard from "@/(features)/search/components/DogCard";
+import SearchLayout from "@/(features)/search/layout/SearchLayout";
+import DogCard from "@/components/DogCard";
 import Pagination from "@/layout/Pagination";
 import Sonner from "@/(features)/favorites/components/Sonner";
 
@@ -29,7 +29,7 @@ export default function SearchPage() {
   } = useSearchFilters();
 
   return (
-    <MainPageLayout
+    <SearchLayout
       breeds={breeds}
       selectedBreeds={selectedBreeds}
       setSelectedBreeds={setSelectedBreeds}
@@ -46,35 +46,22 @@ export default function SearchPage() {
       size={size}
       setSize={setSize}
     >
-
       <Sonner />
 
       {/* Loading State */}
       {loading && <p className="text-center text-gray-500 h-screen">Loading dogs...</p>}
 
-      {/* Dog Results */}
+      {/* No Dogs Found */}
       {!loading && dogs.length === 0 && (
-        <p className="text-center text-gray-500">
-          No dogs found. Try different filters.
-        </p>
+        <p className="text-center text-gray-500">No dogs found. Try different filters.</p>
       )}
 
-      {/* Display Skeleton?
-
-      {!loading && dogs.length !== 0 && (
-        <div className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
-          {dogs.map((dog) => (
-            <DogCard key={dog.id} dog={dog} />
-          ))}
-        </div>
-      )}      
-      */}
-      
-      <div className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
-      {dogs.map((dog) => (
-        <DogCard key={dog.id} dog={dog} />
-      ))}
-    </div>
+      {/* Dog Results */}
+      <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
+        {dogs.map((dog) => (
+          <DogCard key={dog.id} dog={dog} />
+        ))}
+      </div>
 
       {/* Pagination */}
       <Pagination
@@ -82,6 +69,6 @@ export default function SearchPage() {
         totalPages={Math.ceil(totalResults / size)}
         onPageChange={setPage}
       />
-    </MainPageLayout>
+    </SearchLayout>
   );
 }

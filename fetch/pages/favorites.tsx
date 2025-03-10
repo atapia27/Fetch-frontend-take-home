@@ -1,13 +1,11 @@
-import MainPageLayout from "@/layout/MainPageLayout";
+import { useState } from "react";
+import FavoritesLayout from "@/(features)/favorites/layout/FavoritesLayout";
 import MatchModal from "@/(features)/match/MatchModal";
-import DogCard from "@/(features)/search/components/DogCard";
+import DogCard from "@/components/DogCard";
 import Pagination from "@/layout/Pagination";
 import { useFavoritesFilters } from "@/(features)/favorites/hooks/useFavoritesFilters";
 import Sonner from "@/(features)/favorites/components/Sonner";
-import { useEffect, useState } from "react";
-import { fetchDogDetails } from "@/utils/api";
-import { useFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
-import Dog from "@/utils/types";
+import { FaHeart } from "react-icons/fa";
 
 export default function FavoritesPage() {
   const {
@@ -31,16 +29,12 @@ export default function FavoritesPage() {
     dogs,
     totalResults,
     loading,
-  } = useFavoritesFilters(); // Using favorites-specific filter logic
+  } = useFavoritesFilters();
 
-  const [isMatchModalOpen, setMatchModalOpen] = useState(false); // Modal state
-  // const { favorites } = useFavoritesStore();
-  // const [_dogs, setDogs] = useState<Dog[]>([]);
-
-  
+  const [isMatchModalOpen, setMatchModalOpen] = useState(false);
 
   return (
-    <MainPageLayout
+    <FavoritesLayout
       breeds={breeds}
       selectedBreeds={selectedBreeds}
       setSelectedBreeds={setSelectedBreeds}
@@ -56,20 +50,30 @@ export default function FavoritesPage() {
       setSortOrder={setSortOrder}
       size={size}
       setSize={setSize}
+      setMatchModalOpen={setMatchModalOpen}
     >
       <Sonner />
-
-      {/* Loading State */}
-      {loading && (
-        <p className="text-center text-gray-500">Loading favorites...</p>
+      {/* Find Match Button */}
+      {dogs.length > 0 && (
+        <div className="flex justify-center pb-4">
+          <button
+            onClick={() => setMatchModalOpen(true)}
+            className="gap-2 flex items-center rounded-lg bg-red-600 px-6 py-3 text-white font-bold shadow-md hover:bg-red-800 cursor-pointer"
+          >
+            Find My Match!
+            <FaHeart />
+          </button>
+        </div>
       )}
+      {/* Loading State */}
+      {loading && <p className="text-center text-gray-500">Loading favorites...</p>}
 
       {/* No Favorites */}
       {!loading && dogs.length === 0 && (
-        <p className="text-center text-gray-500">
-          No favorite dogs match the filters.
-        </p>
+        <p className="text-center text-gray-500">No favorite dogs match the filters.</p>
       )}
+
+
 
       {/* Favorite Dogs Grid */}
       <div className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
@@ -78,22 +82,8 @@ export default function FavoritesPage() {
         ))}
       </div>
 
-      {/* Find Match Button */}
-      {dogs.length > 0 && (
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => setMatchModalOpen(true)}
-            className="rounded-lg bg-blue-500 px-6 py-3 text-white shadow-md hover:bg-blue-600"
-          >
-            Find My Match
-          </button>
-        </div>
-      )}
-
       {/* Match Modal */}
-      {isMatchModalOpen && (
-        <MatchModal onClose={() => setMatchModalOpen(false)} />
-      )}
+      {isMatchModalOpen && <MatchModal onClose={() => setMatchModalOpen(false)} />}
 
       {/* Pagination */}
       <Pagination
@@ -101,6 +91,6 @@ export default function FavoritesPage() {
         totalPages={Math.ceil(totalResults / size)}
         onPageChange={setPage}
       />
-    </MainPageLayout>
+    </FavoritesLayout>
   );
 }
