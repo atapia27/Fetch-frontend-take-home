@@ -7,7 +7,7 @@ export default function LogoutButton() {
 
   /** --- Styling --- **/
   const buttonVariant =
-    "border-gray-300 bg-red-500 text-white hover:bg-red-600 disabled:opacity-50";
+    "bg-red-500 text-white hover:bg-red-600 disabled:opacity-50";
   const buttonStyle = twMerge(buttonBase, buttonVariant);
 
   return (
