@@ -6,3 +6,13 @@ export default interface Dog {
   zip_code: string;
   breed: string;
 }
+
+// Define expected API response types
+export interface DogResponse {
+  resultIds: string[];
+  total: number;
+}
+
+export interface MatchResponse {
+  match: string;
+}

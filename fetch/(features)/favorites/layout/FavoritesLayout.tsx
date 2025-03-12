@@ -18,10 +18,11 @@ interface FavoritesLayoutProps {
   setSortOrder: (order: "asc" | "desc") => void;
   size: number;
   setSize: (size: number) => void;
-  setMatchModalOpen: (open: boolean) => void;
 }
 
 export default function FavoritesLayout(props: FavoritesLayoutProps) {
+  const bannerStyle = "relative w-full h-[5vh] bg-cover bg-no-repeat md:h-[35vh] pt-18"
+
   return (
     <MainPageLayout
       {...props}
@@ -29,8 +30,8 @@ export default function FavoritesLayout(props: FavoritesLayoutProps) {
       bannerTitle="Your Favorite Dogs in One Place!"
       bannerDescription="Easily browse and manage your saved favorites."
       bannerClassName={twMerge(
-        "relative w-full h-[5vh] bg-cover bg-no-repeat md:h-[35vh] pt-18",
-        "bg-[url('/favoritesBanner.jpeg')] bg-[center-left_-3vh]",
+        bannerStyle,
+        "bg-[url('/favoritesBanner.jpeg')] bg-[center_-vh]",
       )}
       bannerContentClassName="flex items-end flex-col justify-center gap-8 text-right"
       bannerTextPosition="right" // Text in the second grid column

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useDogFilters() {
+export function resetDogFilters() {
   // State management for filters
   const [selectedBreeds, setSelectedBreeds] = useState<string[]>([]);
   const [zipCodes, setZipCodes] = useState<string[]>([]);
@@ -10,6 +10,18 @@ export function useDogFilters() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(12);
+
+  // Reset function
+  const resetFilters = () => {
+    setSelectedBreeds([]);
+    setZipCodes([]);
+    setAgeMin(0);
+    setAgeMax(20);
+    setSortField("breed");
+    setSortOrder("asc");
+    setPage(1);
+    setSize(12);
+  };
 
   return {
     selectedBreeds,
@@ -28,5 +40,6 @@ export function useDogFilters() {
     setPage,
     size,
     setSize,
+    resetFilters, // Export the reset function
   };
 }
