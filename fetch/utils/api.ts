@@ -4,8 +4,6 @@ import { MatchResponse, DogResponse } from "./types";
 import Dog from "./types";
 const API_BASE_URL = "https://frontend-take-home-service.fetch.com";
 
-
-
 // Fetch dog details
 export const fetchDogDetails = async (dogIds: string[]): Promise<Dog[]> => {
   try {
@@ -34,18 +32,21 @@ export const fetchDogs = async (
   size: number,
 ): Promise<{ dogIDs: string[]; dogs: Dog[]; totalResults: number }> => {
   try {
-    const response = await axios.get<DogResponse>(`${API_BASE_URL}/dogs/search`, {
-      params: {
-        breeds: breeds.length > 0 ? breeds : undefined,
-        zipCodes: zipCodes.length > 0 ? zipCodes : undefined,
-        ageMin: ageMin ?? undefined,
-        ageMax: ageMax ?? undefined,
-        sort: `${sortField}:${sortOrder}`,
-        size,
-        from: (page - 1) * size,
+    const response = await axios.get<DogResponse>(
+      `${API_BASE_URL}/dogs/search`,
+      {
+        params: {
+          breeds: breeds.length > 0 ? breeds : undefined,
+          zipCodes: zipCodes.length > 0 ? zipCodes : undefined,
+          ageMin: ageMin ?? undefined,
+          ageMax: ageMax ?? undefined,
+          sort: `${sortField}:${sortOrder}`,
+          size,
+          from: (page - 1) * size,
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    });
+    );
 
     console.log("API Response (IDs):", response.data);
 
@@ -97,8 +98,9 @@ export const fetchMatch = async (): Promise<Dog | null> => {
 
     console.log("Matched dog details:", detailsResponse.data);
 
-    return Array.isArray(detailsResponse.data) && detailsResponse.data.length > 0 
-      ? detailsResponse.data[0] 
+    return Array.isArray(detailsResponse.data) &&
+      detailsResponse.data.length > 0
+      ? detailsResponse.data[0]
       : null;
   } catch (error) {
     console.error("Error fetching match:", error);

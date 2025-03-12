@@ -50,12 +50,14 @@ export default function FavoritesPage() {
 
       {/* Loading State */}
       {loading && (
-        <p className="h-screen text-center text-gray-500">Loading favorites...</p>
+        <p className="h-screen text-center text-gray-500">
+          Loading favorites...
+        </p>
       )}
 
       {/* No Favorites */}
       {!loading && dogs.length === 0 && (
-        <p className="text-center text-gray-500 ">
+        <p className="text-center text-gray-500">
           No favorite dogs match the filters.
         </p>
       )}

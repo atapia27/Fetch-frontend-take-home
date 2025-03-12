@@ -21,7 +21,8 @@ interface SearchLayoutProps {
 }
 
 export default function SearchLayout(props: SearchLayoutProps) {
-  const bannerStyle = "relative w-full h-[5vh] bg-cover bg-no-repeat md:h-[35vh] pt-18"
+  const bannerStyle =
+    "relative w-full h-[5vh] bg-cover bg-no-repeat md:h-[35vh] pt-18";
 
   return (
     <MainPageLayout
@@ -35,7 +36,6 @@ export default function SearchLayout(props: SearchLayoutProps) {
       )}
       bannerContentClassName="flex items-start flex-col justify-center gap-8 text-left"
       bannerTextPosition="left" // Text in the first grid column
-      
     >
       {props.children}
     </MainPageLayout>

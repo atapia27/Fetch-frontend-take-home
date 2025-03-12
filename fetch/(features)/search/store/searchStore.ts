@@ -15,19 +15,21 @@ export const useSearchStore = create<SearchState>()(
       breeds: [],
       selectedBreeds: [],
 
- 
       fetchBreeds: async () => {
         try {
-          const { data } = await axios.get<string[]>(`${API_BASE_URL}/dogs/breeds`, {
-            withCredentials: true,
-          });
-      
+          const { data } = await axios.get<string[]>(
+            `${API_BASE_URL}/dogs/breeds`,
+            {
+              withCredentials: true,
+            },
+          );
+
           set({ breeds: Array.isArray(data) ? data : [] });
         } catch (error) {
           console.error("Failed to fetch dog breeds:", error);
         }
       },
     }),
-    { name: "search-storage" }
-  )
+    { name: "search-storage" },
+  ),
 );

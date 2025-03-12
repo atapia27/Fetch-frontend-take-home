@@ -52,7 +52,9 @@ export default function Navbar() {
       </div>
 
       {/* Match Modal */}
-      {isMatchModalOpen && <MatchModal onClose={() => setMatchModalOpen(false)} />}
+      {isMatchModalOpen && (
+        <MatchModal onClose={() => setMatchModalOpen(false)} />
+      )}
     </nav>
   );
 }

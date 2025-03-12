@@ -5,7 +5,10 @@ interface ZipCodeFilterProps {
   setZipCodes: (zipCodes: string[]) => void;
 }
 
-export default function ZipCodeFilter({ zipCodes, setZipCodes }: ZipCodeFilterProps) {
+export default function ZipCodeFilter({
+  zipCodes,
+  setZipCodes,
+}: ZipCodeFilterProps) {
   const [zipInput, setZipInput] = useState("");
 
   const isValidZip = (zip: string) => /^\d{5}$/.test(zip); // Ensures 5-digit numeric input
@@ -35,8 +38,10 @@ export default function ZipCodeFilter({ zipCodes, setZipCodes }: ZipCodeFilterPr
         <button
           onClick={addZipCode}
           disabled={!isValidZip(zipInput)}
-          className={`rounded-lg px-3 py-2 text-white border ${
-            isValidZip(zipInput) ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" : "bg-gray-400 cursor-not-allowed"
+          className={`rounded-lg border px-3 py-2 text-white ${
+            isValidZip(zipInput)
+              ? "cursor-pointer bg-blue-600 hover:bg-blue-700"
+              : "cursor-not-allowed bg-gray-400"
           }`}
         >
           Add

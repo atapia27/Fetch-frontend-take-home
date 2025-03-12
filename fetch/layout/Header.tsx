@@ -15,7 +15,7 @@ export default function Header({
   setIsOpen,
 }: HeaderProps) {
   return (
-    <div className="mx-72 mb-4 border-b border-gray-300 pt-4 pb-2 bg-[#F9F7F1]">
+    <div className="mx-72 mb-4 border-b border-gray-300 bg-[#F9F7F1] pt-4 pb-2">
       <div className="mx-12 grid grid-cols-3 items-center gap-12">
         {/* Sidebar Toggle */}
         <SidebarToggle isOpen={isOpen} setIsOpen={setIsOpen} />

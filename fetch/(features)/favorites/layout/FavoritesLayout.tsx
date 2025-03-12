@@ -21,7 +21,8 @@ interface FavoritesLayoutProps {
 }
 
 export default function FavoritesLayout(props: FavoritesLayoutProps) {
-  const bannerStyle = "relative w-full h-[5vh] bg-cover bg-no-repeat md:h-[35vh] pt-18"
+  const bannerStyle =
+    "relative w-full h-[5vh] bg-cover bg-no-repeat md:h-[35vh] pt-18";
 
   return (
     <MainPageLayout

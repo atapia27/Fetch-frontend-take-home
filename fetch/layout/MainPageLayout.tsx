@@ -32,7 +32,7 @@ export default function MainPageLayout(props: MainPageLayoutProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F9F7F1] bg-[url('/dogPattern.png')] bg-scale bg-repeat ">
+    <div className="bg-scale flex min-h-screen flex-col bg-[#F9F7F1] bg-[url('/dogPattern.png')] bg-repeat">
       <Navbar />
       <Sidebar {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
 

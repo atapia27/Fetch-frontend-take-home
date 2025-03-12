@@ -18,7 +18,7 @@ export default function MatchModal({ onClose }: MatchModalProps) {
     const getMatch = async () => {
       try {
         const matchedDog = await fetchMatch();
-        
+
         if (matchedDog) {
           setMatch(matchedDog);
           setShowConfetti(true); // Only trigger confetti if a valid match is found

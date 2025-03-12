@@ -13,7 +13,7 @@ export default function Pagination({
     "bg-white rounded-md border p-2 disabled:opacity-50 cursor-pointer ";
 
   return (
-    <div className="flex items-center justify-center gap-4 py-6 ">
+    <div className="flex items-center justify-center gap-4 py-6">
       <button
         onClick={() => onPageChange(Math.max(page - 1, 1))}
         disabled={page === 1}
