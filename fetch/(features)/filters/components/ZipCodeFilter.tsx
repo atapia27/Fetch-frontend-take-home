@@ -1,19 +1,19 @@
-import ComboBox from "@/components/combobox/ComboBox";
-import { ZIP_CODE_LIST } from "../constants/zipCodes";
+import { useState } from "react";
 
 interface ZipCodeFilterProps {
   zipCodes: string[];
   setZipCodes: (zipCodes: string[]) => void;
 }
 
-export default function ZipCodeFilter({
-  zipCodes,
-  setZipCodes,
-}: ZipCodeFilterProps) {
-  const addZipCode = (zip: string) => {
-    if (!ZIP_CODE_LIST.includes(zip)) return;
-    if (!zipCodes.includes(zip)) {
-      setZipCodes([...zipCodes, zip]);
+export default function ZipCodeFilter({ zipCodes, setZipCodes }: ZipCodeFilterProps) {
+  const [zipInput, setZipInput] = useState("");
+
+  const isValidZip = (zip: string) => /^\d{5}$/.test(zip); // Ensures 5-digit numeric input
+
+  const addZipCode = () => {
+    if (isValidZip(zipInput) && !zipCodes.includes(zipInput)) {
+      setZipCodes([...zipCodes, zipInput]);
+      setZipInput(""); // Clear input after adding
     }
   };
 
@@ -23,12 +23,25 @@ export default function ZipCodeFilter({
 
   return (
     <div className="w-full">
-      {/* ComboBox for ZIP Code Selection */}
-      <ComboBox
-        options={ZIP_CODE_LIST}
-        onSelect={addZipCode}
-        placeholder="Enter or select ZIP code..."
-      />
+      {/* ZIP Code Input */}
+      <div className="flex items-center gap-2">
+        <input
+          type="text"
+          value={zipInput}
+          onChange={(e) => setZipInput(e.target.value)}
+          placeholder="Enter ZIP code..."
+          className="w-full rounded-lg border border-gray-300 p-2"
+        />
+        <button
+          onClick={addZipCode}
+          disabled={!isValidZip(zipInput)}
+          className={`rounded-lg px-3 py-2 text-white border ${
+            isValidZip(zipInput) ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" : "bg-gray-400 cursor-not-allowed"
+          }`}
+        >
+          Add
+        </button>
+      </div>
 
       {/* Display Selected ZIP Codes as Tags */}
       {zipCodes.length > 0 && (

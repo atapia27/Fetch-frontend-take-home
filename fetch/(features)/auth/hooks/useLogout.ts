@@ -13,7 +13,7 @@ export function useLogout() {
   const handleLogout = async () => {
     setLoading(true);
     await logout();
-    router.push("/login"); // Redirect to login page after logout
+    router.push("/"); // Redirect to login page after logout
     setLoading(false);
   };
 

@@ -41,8 +41,6 @@ export default function Sidebar({
   setSortField,
   sortOrder,
   setSortOrder,
-  size,
-  setSize,
   isOpen,
   setIsOpen,
 }: SidebarProps) {

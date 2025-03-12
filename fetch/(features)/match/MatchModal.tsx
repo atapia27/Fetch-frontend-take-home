@@ -3,13 +3,13 @@ import { fetchMatch } from "@/utils/api"; // Function to call /dogs/match
 import DogCard from "@/components/DogCard";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
-
+import Dog from "@/utils/types";
 interface MatchModalProps {
   onClose: () => void;
 }
 
 export default function MatchModal({ onClose }: MatchModalProps) {
-  const [match, setMatch] = useState(null);
+  const [match, setMatch] = useState<Dog | null>(null);
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
@@ -18,9 +18,12 @@ export default function MatchModal({ onClose }: MatchModalProps) {
     const getMatch = async () => {
       try {
         const matchedDog = await fetchMatch();
-        setMatch(matchedDog);
-        setShowConfetti(true); // Trigger confetti when match is found
-        setTimeout(() => setShowConfetti(false), 10000); // Stop confetti after 10s
+        
+        if (matchedDog) {
+          setMatch(matchedDog);
+          setShowConfetti(true); // Only trigger confetti if a valid match is found
+          setTimeout(() => setShowConfetti(false), 10000); // Stop confetti after 10s
+        }
       } catch (error) {
         console.error("Failed to fetch match:", error);
       }

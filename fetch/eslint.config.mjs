@@ -1,7 +1,8 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import { rules } from "eslint-config-prettier";
+import prettierConfig from "eslint-config-prettier";
+const { rules } = prettierConfig;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

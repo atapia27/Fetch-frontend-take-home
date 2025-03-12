@@ -32,13 +32,13 @@ export default function MainPageLayout(props: MainPageLayoutProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col bg-[#F9F7F1]">
+    <div className="flex min-h-screen flex-col bg-[#F9F7F1] bg-[url('/dogPattern.png')] bg-scale bg-repeat ">
       <Navbar />
       <Sidebar {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
 
       {/* Banner Background */}
       <div className={props.bannerClassName}>
-        <div className="grid h-full w-full grid-cols-2 px-64">
+        <div className="grid h-full w-full grid-cols-2 px-72">
           {props.bannerTextPosition === "left" ? (
             <>
               <div className={props.bannerContentClassName}>
@@ -75,9 +75,9 @@ export default function MainPageLayout(props: MainPageLayoutProps) {
         setIsOpen={setIsOpen}
       />
 
-      {/* Main Content */}
-      <div className="flex w-full flex-col bg-[url('/dogPattern.png')] bg-contain bg-repeat-y px-72 pb-4">
-        <div>{props.children}</div>
+      {/* Main Content with Flex Grow */}
+      <div className="flex flex-1 flex-col px-72 pb-4">
+        <div className="">{props.children}</div>
       </div>
     </div>
   );
