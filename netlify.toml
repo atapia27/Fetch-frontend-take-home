@@ -2,3 +2,8 @@
   base = "fetch"
   publish = "fetch/.next"
   command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
