@@ -1,6 +1,6 @@
 import { useFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
 import { useEffect, useState, useMemo } from "react";
-import { useDogFilters } from "@/hooks/useDogFilters";
+import { resetDogFilters } from "@/hooks/resetDogFilters";
 import Dog from "@/utils/types";
 
 export function useFavoritesFilters() {
@@ -15,7 +15,7 @@ export function useFavoritesFilters() {
   );
 
   // Use shared filtering logic
-  const filters = useDogFilters();
+  const filters = resetDogFilters();
 
   // Apply filtering, sorting, and pagination
   useEffect(() => {

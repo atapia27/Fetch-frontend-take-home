@@ -1,16 +1,16 @@
-import { useDogStore } from "@/(features)/search/store/dogStore";
+import { useSearchStore } from "@/(features)/search/store/searchStore";
 import { fetchDogs } from "@/utils/api";
 import { useState, useEffect, useCallback } from "react";
 import Dog from "@/utils/types";
-import { useDogFilters } from "@/hooks/useDogFilters";
+import { resetDogFilters } from "@/hooks/resetDogFilters";
 
 export default function useSearchFilters() {
-  const { breeds, fetchBreeds } = useDogStore();
+  const { breeds, fetchBreeds } = useSearchStore();
   const [filteredDogs, setFilteredDogs] = useState<Dog[]>([]);
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const filters = useDogFilters();
+  const filters = resetDogFilters();
 
   useEffect(() => {
     if (breeds.length === 0) fetchBreeds();
