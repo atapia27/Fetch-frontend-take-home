@@ -48,7 +48,11 @@ export const useFavoritesStore = create<FavoritesState>()(
 
       toggleFavorite: (dog: Dog) => {
         const { isFavorite, addFavorite, removeFavorite } = get();
-        isFavorite(dog.id) ? removeFavorite(dog) : addFavorite(dog);
+        if (isFavorite(dog.id)) {
+          removeFavorite(dog);
+        } else {
+          addFavorite(dog);
+        }  
       },
 
       isFavorite: (id) => get().favorites.some((dog) => dog.id === id),
