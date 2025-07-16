@@ -1,6 +1,6 @@
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Image from "next/image";
-import { useFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
+import { useToggleFavorite, useIsDogFavorite } from "@/(features)/favorites/store/favoritesStore";
 import Dog from "@/utils/types";
 
 interface DogCardProps {
@@ -8,8 +8,8 @@ interface DogCardProps {
 }
 
 export default function DogCard({ dog }: DogCardProps) {
-  const { toggleFavorite, isFavorite } = useFavoritesStore();
-  const favorited = isFavorite(dog.id);
+  const toggleFavorite = useToggleFavorite();
+  const favorited = useIsDogFavorite(dog.id);
 
   /** --- Full Reused Styles --- **/
   const infoLabelText = "text-sm font-semibold text-gray-600";

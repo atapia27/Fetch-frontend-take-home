@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuthStore } from "@/(features)/auth/store/authStore";
+import { useLogin as useLoginAction } from "@/(features)/auth/store/authStore";
 import { useRouter } from "next/router";
 
 export function useLogin() {
@@ -10,7 +10,7 @@ export function useLogin() {
   const [error, setError] = useState("");
 
   /** --- Authentication Logic --- **/
-  const login = useAuthStore((state) => state.login);
+  const login = useLoginAction();
   const router = useRouter();
 
   const handleLogin = async () => {

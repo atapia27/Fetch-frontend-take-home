@@ -1,16 +1,18 @@
-import { useSearchStore } from "@/(features)/search/store/searchStore";
+import { useBreeds, useFetchBreeds } from "@/(features)/search/store/searchStore";
 import { fetchDogs } from "@/utils/api";
 import { useState, useEffect, useCallback } from "react";
 import Dog from "@/utils/types";
-import { resetDogFilters } from "@/hooks/resetDogFilters";
+import { useResetDogFilters } from "@/hooks/resetDogFilters";
 
 export default function useSearchFilters() {
-  const { breeds, fetchBreeds } = useSearchStore();
+  const breeds = useBreeds();
+  const fetchBreeds = useFetchBreeds();
   const [filteredDogs, setFilteredDogs] = useState<Dog[]>([]);
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const filters = resetDogFilters();
+  const filters = useResetDogFilters();
+  // retreives all basic information for the  page, including
 
   useEffect(() => {
     if (breeds.length === 0) fetchBreeds();
@@ -49,7 +51,18 @@ export default function useSearchFilters() {
   ]);
 
   useEffect(() => {
-    loadDogs();
+    filters.setPage(1)
+  }, [  filters.selectedBreeds,
+        filters.zipCodes,
+        filters.ageMin,
+        filters.ageMax,
+        filters.sortField,
+        filters.sortOrder,
+        filters.size])
+
+
+  useEffect(() => {
+    loadDogs()
   }, [loadDogs]);
 
   return {
@@ -57,6 +70,7 @@ export default function useSearchFilters() {
     breeds,
     totalResults,
     loading,
+    
     ...filters,
   };
 }

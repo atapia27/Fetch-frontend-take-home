@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuthStore } from "@/(features)/auth/store/authStore";
+import { useLogout as useLogoutAction } from "@/(features)/auth/store/authStore";
 import { useRouter } from "next/router";
 
 export function useLogout() {
@@ -7,7 +7,7 @@ export function useLogout() {
   const [loading, setLoading] = useState(false);
 
   /** --- Authentication Logic --- **/
-  const logout = useAuthStore((state) => state.logout);
+  const logout = useLogoutAction();
   const router = useRouter();
 
   const handleLogout = async () => {

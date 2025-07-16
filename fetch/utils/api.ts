@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
+import { getFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
 import { MatchResponse, DogResponse } from "./types";
 import Dog from "./types";
 const API_BASE_URL = "https://frontend-take-home-service.fetch.com";
@@ -65,7 +65,7 @@ export const fetchDogs = async (
 // Fetch matched dog
 export const fetchMatch = async (): Promise<Dog | null> => {
   try {
-    const { favoriteDogIDs } = useFavoritesStore.getState();
+    const { favoriteDogIDs } = getFavoritesStore();
 
     if (!Array.isArray(favoriteDogIDs) || favoriteDogIDs.length === 0) {
       console.error("No favorite dogs selected for matching.");

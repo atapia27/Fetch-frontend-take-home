@@ -5,7 +5,6 @@ import MatchModal from "@/(features)/match/MatchModal";
 import FindMatchButton from "@/(features)/match/components/FindMatchButton";
 
 import { useEffect, useState } from "react";
-import { FaHeart } from "react-icons/fa";
 
 export default function Navbar() {
   const HeaderStyle =

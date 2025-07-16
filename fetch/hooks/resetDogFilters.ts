@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function resetDogFilters() {
+export function useResetDogFilters() {
   // State management for filters
   const [selectedBreeds, setSelectedBreeds] = useState<string[]>([]);
   const [zipCodes, setZipCodes] = useState<string[]>([]);

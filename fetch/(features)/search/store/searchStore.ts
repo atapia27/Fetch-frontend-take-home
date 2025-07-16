@@ -9,11 +9,11 @@ interface SearchState {
   fetchBreeds: () => Promise<void>;
 }
 
-export const useSearchStore = create<SearchState>()(
+// Create the store without exporting it directly
+const searchStore = create<SearchState>()(
   persist(
     (set) => ({
       breeds: [],
-      selectedBreeds: [],
 
       fetchBreeds: async () => {
         try {
@@ -33,3 +33,22 @@ export const useSearchStore = create<SearchState>()(
     { name: "search-storage" },
   ),
 );
+
+// Atomic, stable selectors
+const selectBreeds = (state: SearchState) => state.breeds;
+const selectFetchBreeds = (state: SearchState) => state.fetchBreeds;
+
+// Custom hooks that only export what's needed
+export const useBreeds = () => searchStore(selectBreeds);
+export const useFetchBreeds = () => searchStore(selectFetchBreeds);
+
+// Hook for getting all search state and actions
+export const useSearchStore = () => {
+  const breeds = useBreeds();
+  const fetchBreeds = useFetchBreeds();
+
+  return {
+    breeds,
+    fetchBreeds,
+  };
+};

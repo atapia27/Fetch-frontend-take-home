@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { useFavoritesStore } from "@/(features)/favorites/store/favoritesStore";
+import { useNotifications, useClearNotification } from "@/(features)/favorites/store/favoritesStore";
 
 export default function Sonner() {
-  const { notifications, clearNotification } = useFavoritesStore();
+  const notifications = useNotifications();
+  const clearNotification = useClearNotification();
 
   useEffect(() => {
     const timeouts = notifications.map(
@@ -20,7 +21,9 @@ export default function Sonner() {
       {notifications.map((notification) => (
         <div
           key={notification.id}
-          className="animate-fade-in rounded-md bg-green-500 px-4 py-2 text-white shadow-md"
+          className={`animate-fade-in rounded-md px-4 py-2 text-white shadow-md ${
+            notification.type === 'add' ? 'bg-green-500' : 'bg-red-500'
+          }`}
         >
           {notification.message}
         </div>
